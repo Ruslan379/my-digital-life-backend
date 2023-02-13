@@ -5,13 +5,9 @@ const app = require('./app');
 
 
 // ----------------------------------------------------------------
-
 const { DB_HOST, PORT = 3033 } = process.env;
 
 
-
-//! 3-вариант NEW
-// async function main() {
 (async () => {
   try {
     await mongoose.connect(DB_HOST);
