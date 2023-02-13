@@ -62,9 +62,10 @@ const registrationController = async (req, res) => {
 
     //? ------------------- SendGrid -------------------
     //todo ------------------- Nodemailer -------------------
-    const verificationToken = nanoid();
+    // const verificationToken = nanoid();
+    const verificationToken = null; //? Заглушка для Kapu$ta
     console.log("");
-    console.log("verificationToken:".bgRed.white, verificationToken.red); //!
+    console.log("verificationToken:".bgRed.white, verificationToken); //!
 
 
     //? 3-вариант (самый сложный)
@@ -79,7 +80,7 @@ const registrationController = async (req, res) => {
     console.log("");
 
 
-
+    //? Для Kapu$ta - НЕ ИСПОЛЬЗУЕТСЯ
     //? ------------------ SendGrid -------------------
     //todo -------------- Nodemailer ------------------
     //! Отправка письма
@@ -93,15 +94,16 @@ const registrationController = async (req, res) => {
         html: `<a href = "https://contact-book-backend52.onrender.com/api/users/verify/${verificationToken}" target="_blank">Нажмите для подтверждения вашего EMAIL</a>`,
     };
 
+    //? Для Kapu$ta - SendGrid ОТКЛЮЧЕНО
     //? ------------------ SendGrid -------------------
-    await sendVerificationEmailSendGrid(mail); //! отправка подтверждениия (верификации) на email пользователя
+    // await sendVerificationEmailSendGrid(mail); //! отправка подтверждениия (верификации) на email пользователя
 
     //todo -------------- Nodemailer ------------------
     // await sendVerificationEmailNodemailer(mail); //! отправка подтверждениия (верификации) на email пользователя
 
 
-    //! +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    //! Создаем ТОКЕН
+
+    //! +++++++++++++++++++++++++++++++++ Создаем ТОКЕН ++++++++++++++++++++++++++++++++++++
     const payload = { id: newUser._id };
 
     const token = jwt.sign(payload, JWT_SECRET);
@@ -114,7 +116,7 @@ const registrationController = async (req, res) => {
     console.log("\nuser:".yellow, user); //!
     console.log("token:".red, token.green); //!
     console.log("");
-    //! +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //! ___________________________________ Создаем ТОКЕН ___________________________________
 
 
 
