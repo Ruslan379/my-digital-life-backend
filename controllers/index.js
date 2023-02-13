@@ -2,11 +2,11 @@
 const contactsControllers = require("./contactsControllers");
 const authControllers = require("./authControllers")
 // const usersControllers = require("./usersControllers")
-const filesControllers = require("./filesControllers")
+const transactionsControllers = require("./transactionsControllers")
 
 module.exports = {
     contactsControllers,
     authControllers,
     // usersControllers
-    filesControllers
+    transactionsControllers
 }

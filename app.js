@@ -6,16 +6,17 @@ require("colors");
 const path = require('path')
 
 const authRouter = require('./routes/api/authRouter.js');
-const contactsRouter = require('./routes/api/contactsRouter');
+const contactsRouter = require('./routes/api/contactsRouter.js');
+const transactionsRouter = require('./routes/api/transactionsRouter.js');
 
 
 //----------------------------------------------------------------
 const app = express()
 
-// const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
-// app.use(logger(formatsLogger))
+const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
+app.use(logger(formatsLogger))
 
-app.use(logger("dev"))
+// app.use(logger("dev")) //! возможно для деплоя
 app.use(cors())
 app.use(express.json())
 app.use(express.static("public")); //! Чтобы Express мог раздавать статические файлы из папки "/public"
@@ -23,21 +24,15 @@ app.use(express.static("public")); //! Чтобы Express мог раздава�
 
 //!++++++++++++++++++++++++++ static ++++++++++++++++++++++++++++++
 const FILE_DIR = path.resolve("./public/output")
-
-//! serve static
-// app.use("/", express.static("public"));
 app.use("/public", express.static("public")); //! мой
-// app.use("/public/avatars", express.static("public/avatars"));
-//! вариант Юрия Довжика
-// app.use('/static', express.static('public')); //? 
-
-
 //!+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
+app.use('/api/users', authRouter);
+app.use('/api/contacts', contactsRouter);
+app.use('/api/transactions', transactionsRouter);
 
-app.use('/api/users', authRouter)
-app.use('/api/contacts', contactsRouter)
+
 
 app.use((req, res) => {
   console.log("!!! ОШИБКА !!!:".bgRed.white) //!
