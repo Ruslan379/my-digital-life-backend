@@ -26,14 +26,15 @@ const { lineBreak } = require("../../services");
 // console.log("app:".bgRed.black, app);//!
 
 // const storage = getStorage(app);
-//!firebase +++++++++++++++++++++++++++++++++++++++++++++++
 
-//!firebase
+//! ++++++++ firebase +++++++++
 const { storage } = require("../../firebase/config.js");
 
 const { ref, uploadBytes, getDownloadURL, getBlob } = require("firebase/storage");
+//!firebase +++++++++++++++++++++++++++++++++++++++++++++++
 
-const fetch = require("node-fetch");
+
+// const fetch = require("node-fetch");
 
 const { Buffer, Blob } = require('buffer'); //?
 
@@ -62,12 +63,12 @@ const updateAvatar = async (req, res) => {
     console.log("");
     //----------------------------------------------------------------------------
 
-    //! ПЕРЕИМЕНОВАНИЕ файла АВАТАРКИ (пока не используется)
-    // const avatarNewJimpName = `Jimp_${userId}_${originalname}`; //?
-    const [filename, extension] = originalname.split(".");
-    const avatarNewJimpName = `${userId}.${extension}`;
-    console.log("avatarNewJimpName:".bgMagenta, avatarNewJimpName.bgGreen.red); //!;
-    console.log("");
+    // //! ПЕРЕИМЕНОВАНИЕ файла АВАТАРКИ (пока не используется)
+    // // const avatarNewJimpName = `Jimp_${userId}_${originalname}`; //?
+    // const [filename, extension] = originalname.split(".");
+    // const avatarNewJimpName = `${userId}.${extension}`;
+    // console.log("avatarNewJimpName:".bgMagenta, avatarNewJimpName.bgGreen.red); //!;
+    // console.log("");
 
 
     //! ++++++++++++++++++++++++++++++++++++ Запись файла АВАТАРКИ в mongoDB +++++++++++++++++++++++++++++++++++++
@@ -87,20 +88,20 @@ const updateAvatar = async (req, res) => {
     // console.log("req.user.avatarImage.image_ДО:".bgRed.black, image); //!;
     // console.log("");
 
-    //? ----- !!! С ипользованием  поля avatarImage в MongoDB:
-    //! Записываем файл АВАТАРКИ в MongoDB в объект avatarImage 
-    await User.findByIdAndUpdate(req.user._id, { avatarImage: { ...final_img } });
+    // //? ----- !!! С ипользованием  поля avatarImage в MongoDB (пока не надо):
+    // //! Записываем файл АВАТАРКИ в MongoDB в объект avatarImage 
+    // await User.findByIdAndUpdate(req.user._id, { avatarImage: { ...final_img } });
 
-    //? ----- !!! С ипользованием  поля avatarImage в MongoDB:
-    //! Получаем обновленного userUpdate 
-    const userUpdate = await User.findOne(req.user._id);
-    // console.log("userUpdate:".bgBlue.black, userUpdate); //!;
-    const imageUpdate = userUpdate.avatarImage.image;
-    // console.log("userUpdate.avatarImage.image:".bgBlue.black, imageNew); //!;
-    // console.log("");
+    // //? ----- !!! С ипользованием  поля avatarImage в MongoDB (пока не надо):
+    // //! Получаем обновленного userUpdate 
+    // const userUpdate = await User.findOne(req.user._id);
+    // // console.log("userUpdate:".bgBlue.black, userUpdate); //!;
+    // const imageUpdate = userUpdate.avatarImage.image;
+    // // console.log("userUpdate.avatarImage.image:".bgBlue.black, imageNew); //!;
+    // // console.log("");
 
     //! Получение АБСОЛЮТНОЙ ссылки avatarURL на файл АВАТАРКИ
-    // const avatarURL = 'data:image/png;base64,' + Buffer.from(imageUpdate).toString('base64'); //? ----- !!! С ипользованием  поля avatarImage в MongoDB:
+    // const avatarURL = 'data:image/png;base64,' + Buffer.from(imageUpdate).toString('base64'); //? ----- !!! С ипользованием  поля avatarImage в MongoDB (пока не надо)
     const avatarURL = 'data:image/png;base64,' + Buffer.from(final_img.image).toString('base64'); //!* так, если не создавать в MongoDB поле avatarImage
     console.log("АСОЛЮТНЫЙ (ПОЛНЫЙ) путь к новому Jimp-файлу АВАТАРКИ --> avatarURL:".bgGreen.black); //!;
     console.log(avatarURL.green); //!;
@@ -130,8 +131,8 @@ const updateAvatar = async (req, res) => {
         // console.log("");
 
 
-        //!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        //! Отправка АВАТАР на Firebase Storage без обработки
+        //!+++++++++++++++++++++++++++++++++++++ Firebase +++++++++++++++++++++++++++++++++++++++++++++
+        //! Отправка АВАТАР на Firebase Storage без обработки - НЕ РАБОТАЕТ
         // const storageRef = ref(storage, `avatars/${avatarNewJimpName}`);
 
         // console.log("storageRef:".bgYellow.black, storageRef); //!
@@ -146,10 +147,11 @@ const updateAvatar = async (req, res) => {
 
 
         //! Получение АБСОЛЮТНОЙ ссылки на файл АВАТАРКИ с Firebase Storage без обработки
-        // const avatarURL2 = await getDownloadURL(ref(storage, `avatars/${avatarNewJimpName}`));
-        const avatarURL2 = await getDownloadURL(ref(storage, `avatars/${originalname}`));
-        console.log("АСОЛЮТНЫЙ (ПОЛНЫЙ) путь к новому Jimp-файлу АВАТАРКИ --> avatarURL2:".bgGreen.black, avatarURL2.green); //!;
-        console.log("");
+        // // const avatarURL2 = await getDownloadURL(ref(storage, `avatars/${avatarNewJimpName}`));
+        // const avatarURL2 = await getDownloadURL(ref(storage, `avatars/${originalname}`));
+        // console.log("АСОЛЮТНЫЙ (ПОЛНЫЙ) путь к новому Jimp-файлу АВАТАРКИ --> avatarURL2:".bgGreen.black, avatarURL2.green); //!;
+        // console.log("");
+
 
         //! НЕ РАБОТАЕТ
         // //? ПЕРЕИМЕНОВАНИЕ файла аватара с временной папки tmp в папку назначения E:\GoIT\Code\goit-node-hw-05\public\avatars
@@ -161,21 +163,21 @@ const updateAvatar = async (req, res) => {
         // const storageRef = ref(storage, `avatars/${avatarNewJimpName}`);
         // console.log("storageRef:".bgYellow.black, storageRef); //!
         // await uploadBytes(storageRef, file); //! Cannot read properties of undefined (reading 'byteLength')
-
-        //!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //!_________________________________________ Firebase _________________________________________
 
 
         //! УДАЛЕНИЕ файла аватара с временной папки tmp
         // await fs.unlink(tempUpload); //todo 1
         fs.unlinkSync(tempUpload); //todo 2
 
-        //! ЗАПИСЬ  в ---> avatarURL2 ссылки ссылки на файл АВАТАРКИ с Firebase Storage без обработки
-        await User.findByIdAndUpdate(req.user._id, { avatarURL2 });
-        // await User.findByIdAndUpdate(req.user._id, { avatarURL2 }, { new: true });
+        // //! ЗАПИСЬ  в ---> avatarURL2 ссылки ссылки на файл АВАТАРКИ с Firebase Storage без обработки
+        // await User.findByIdAndUpdate(req.user._id, { avatarURL2 });
+        // // await User.findByIdAndUpdate(req.user._id, { avatarURL2 }, { new: true });
 
 
         //* ОТВЕТ
-        res.json({ avatarURL, avatarURL2 });
+        // res.json({ avatarURL, avatarURL2 });
+        res.json({ avatarURL }); //? for Kapu$ta
 
     } catch (error) {
         // await fs.unlink(tempUpload); //todo 1
@@ -183,6 +185,5 @@ const updateAvatar = async (req, res) => {
         throw error;
     }
 };
-
 
 module.exports = updateAvatar;

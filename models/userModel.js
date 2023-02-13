@@ -33,6 +33,7 @@ const userSchema = Schema({
         type: String,
         default: null,
     },
+    //? НЕ НАДО для Kapu$ta:
     //! файл АВАТАКИ (весь)
     // avatarImage: {
     //     image: {
@@ -49,11 +50,12 @@ const userSchema = Schema({
         required: [true, 'Avatar is required'],
         // default: null,
     },
-    avatarURL2: {
-        type: String,
-        // required: [true, 'Avatar is required'],
-        default: "default",
-    },
+    //? НЕ НАДО для Kapu$ta:
+    // avatarURL2: {
+    //     type: String,
+    //     // required: [true, 'Avatar is required'],
+    //     default: "default",
+    // },
     verify: {
         type: Boolean,
         // default: false,
@@ -61,7 +63,7 @@ const userSchema = Schema({
     },
     verificationToken: {
         type: String,
-        // required: [true, 'Verify token is required'], //? Для Kapu$ta
+        // required: [true, 'Verify token is required'], //? НЕ НАДО для Kapu$ta:
     },
 
 }, { versionKey: false, timestamps: true });
