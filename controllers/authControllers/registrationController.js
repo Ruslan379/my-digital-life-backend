@@ -94,7 +94,7 @@ const registrationController = async (req, res) => {
         html: `<a href = "https://contact-book-backend52.onrender.com/api/users/verify/${verificationToken}" target="_blank">Нажмите для подтверждения вашего EMAIL</a>`,
     };
 
-    //? Для Kapu$ta - SendGrid ОТКЛЮЧЕНО
+    //? Для Kapu$ta - SendGrid --> ОТКЛЮЧЕНО
     //? ------------------ SendGrid -------------------
     // await sendVerificationEmailSendGrid(mail); //! отправка подтверждениия (верификации) на email пользователя
 
@@ -102,29 +102,30 @@ const registrationController = async (req, res) => {
     // await sendVerificationEmailNodemailer(mail); //! отправка подтверждениия (верификации) на email пользователя
 
 
+    //? Для Kapu$ta - Создаем ТОКЕН --> ОТКЛЮЧЕНО
+    // //! +++++++++++++++++++++++++++++++++ Создаем ТОКЕН ++++++++++++++++++++++++++++++++++++
+    // const payload = { id: newUser._id };
 
-    //! +++++++++++++++++++++++++++++++++ Создаем ТОКЕН ++++++++++++++++++++++++++++++++++++
-    const payload = { id: newUser._id };
+    // const token = jwt.sign(payload, JWT_SECRET);
+    // // const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" }); //! Временный - 1 час
 
-    const token = jwt.sign(payload, JWT_SECRET);
-    // const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" }); //! Временный - 1 час
+    // // user.token = token
+    // //! Обновляем поле "token" в MongoDB --> db-contacts.users
+    // const user = await User.findByIdAndUpdate(newUser._id, { token }, { new: true });
 
-    // user.token = token
-    //! Обновляем поле "token" в MongoDB --> db-contacts.users
-    const user = await User.findByIdAndUpdate(newUser._id, { token }, { new: true });
-
-    console.log("\nuser:".yellow, user); //!
-    console.log("token:".red, token.green); //!
-    console.log("");
-    //! ___________________________________ Создаем ТОКЕН ___________________________________
+    // console.log("\nuser:".yellow, user); //!
+    // console.log("token:".red, token.green); //!
+    // console.log("");
+    // //! ___________________________________ Создаем ТОКЕН ___________________________________
 
 
 
     res.status(201).json({
         // status: "success",
         code: 201,
-        user,
-        token,
+        // user, //? НЕ НАДО для Kapu$ta:
+        // token, //? НЕ НАДО для Kapu$ta:
+        newUser,
         // userNew: {
         //     email,
         //     subscription: newUser.subscription,

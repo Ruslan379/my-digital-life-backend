@@ -23,7 +23,7 @@ app.use(express.static("public")); //! Чтобы Express мог раздава�
 
 
 //!++++++++++++++++++++++++++ static ++++++++++++++++++++++++++++++
-const FILE_DIR = path.resolve("./public/output")
+// const FILE_DIR = path.resolve("./public/output")
 app.use("/public", express.static("public")); //! мой
 //!+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
