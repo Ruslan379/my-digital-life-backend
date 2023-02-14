@@ -17,6 +17,7 @@ const updateBalance = async (req, res) => {
 
     console.log("updateBalanceController --> userId:".bgBlue.red, userId.red); //!
     console.log("updateBalanceController --> updateBalance:".bgBlue.yellow, balanceUpdate); //!
+    console.log("typeof balanceUpdate:".yellow, (typeof Number(balanceUpdate)).red); //!
 
     //! Находим user по его _id:
     const user = await User.findOne({ _id: userId });
@@ -27,7 +28,7 @@ const updateBalance = async (req, res) => {
     };
 
     //! ЗАПИСЬ нового значения balance в user
-    const userUpdate = await User.findByIdAndUpdate(req.user._id, { balance: balanceUpdate });
+    const userUpdate = await User.findByIdAndUpdate(req.user._id, { balance: Number(balanceUpdate) }, { new: true });
 
     console.log(""); //!
     console.log("updateBalanceController --> userUpdate:".bgBlue.yellow, userUpdate); //!
