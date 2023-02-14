@@ -3,7 +3,7 @@ const { Unauthorized } = require("http-errors");
 
 
 //-----------------------------------------------------------------------------
-const getBalance = async (req, res) => {
+const getAllTransactions = async (req, res) => {
 
 
 
@@ -15,4 +15,4 @@ const getBalance = async (req, res) => {
 };
 
 
-module.exports = getBalance
+module.exports = getAllTransactions

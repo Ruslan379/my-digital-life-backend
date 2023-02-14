@@ -6,6 +6,7 @@ const updatePatchUserSubscription = require("./updatePatchUserSubscription")
 const updateAvatar = require("./updateAvatar")
 const verifyEmail = require("./verifyEmail")
 const resendVerifyEmail = require("./resendVerifyEmail")
+const getBalance = require("./getBalance")
 
 
 
@@ -18,4 +19,5 @@ module.exports = {
     updateAvatar,
     verifyEmail,
     resendVerifyEmail,
+    getBalance,
 }

@@ -65,7 +65,11 @@ const userSchema = Schema({
         type: String,
         // required: [true, 'Verify token is required'], //? НЕ НАДО для Kapu$ta:
     },
-
+    //? Для Kapu$ta
+    balance: {
+        type: Number,
+        default: 0,
+    },
 }, { versionKey: false, timestamps: true });
 
 

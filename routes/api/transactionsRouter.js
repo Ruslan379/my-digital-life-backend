@@ -20,11 +20,9 @@ const validateMiddlewarePatch = validation(transactionJoiSchemaPatch);
 
 //! 1. Получение ТРАНЗАКЦИИ ПОЛЬЗОВАТЕЛЯ 
 // router.get("/", controllerWrapper(ctrl.getAllContacts));
-router.get("/balance", authMiddleware, controllerWrapper(ctrl.getBalance));
+router.get("/", authMiddleware, controllerWrapper(ctrl.getAllTransactions));
 
-//! 2. Получение balance 
-// router.get("/", controllerWrapper(ctrl.getAllContacts));
-router.get("/balance", authMiddleware, controllerWrapper(ctrl.getBalance));
+
 
 
 

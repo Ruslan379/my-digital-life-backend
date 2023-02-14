@@ -1,6 +1,6 @@
-const getBalance = require("./getBalance")
+const getAllTransactions = require("./getAllTransactions")
 
 
 module.exports = {
-    getBalance,
+    getAllTransactions,
 }

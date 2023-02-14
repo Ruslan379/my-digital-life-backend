@@ -74,6 +74,9 @@ router.post(
     controllerWrapper(ctrl.resendVerifyEmail)
 );
 
+//! 9. Получение balance ПОЛЬЗОВАТЕЛЯ 
+// router.get("/", controllerWrapper(ctrl.getAllContacts));
+router.get("/balance", authMiddleware, controllerWrapper(ctrl.getBalance));
 
 // module.exports = { authRouter: router }
 module.exports = router
