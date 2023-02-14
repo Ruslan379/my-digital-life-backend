@@ -7,6 +7,7 @@ const updateAvatar = require("./updateAvatar")
 const verifyEmail = require("./verifyEmail")
 const resendVerifyEmail = require("./resendVerifyEmail")
 const getBalance = require("./getBalance")
+const updateBalance = require("./updateBalance")
 
 
 
@@ -20,4 +21,5 @@ module.exports = {
     verifyEmail,
     resendVerifyEmail,
     getBalance,
+    updateBalance,
 }
