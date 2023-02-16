@@ -50,9 +50,8 @@ router.post("/expenses", authMiddleware, validateMiddlewarePost, controllerWrapp
 // router.patch("/:contactId/favorite", authMiddleware, isValidId, validateMiddlewarePatchFavorite, controllerWrapper(ctrl.updatePatchContactFavorite));
 
 
-// //! 5. Удаление ОДНОГО КОНТАКТА по id
-// // router.delete('/:contactId', isValidId, controllerWrapper(ctrl.removeContact));
-// router.delete('/:contactId', authMiddleware, isValidId, controllerWrapper(ctrl.removeContact));
+//! 5. Удаление ОДНОГО КОНТАКТА по id
+router.delete('/:contactId', authMiddleware, isValidId, controllerWrapper(ctrl.removeTransaction));
 
 
 // //! 6. Удаление ВСЕХ КОНТАКТОВ

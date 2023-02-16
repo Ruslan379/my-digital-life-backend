@@ -1,23 +1,23 @@
+const { Transaction } = require("../../models");
 const { NotFound } = require('http-errors')
-const { Contact } = require("../../models");
 
 const { lineBreak } = require("../../services");
 
 
 //-----------------------------------------------------------------------------
-const removeContact = async (req, res, next) => {
+const removeTransaction = async (req, res, next) => {
     const { contactId } = req.params;
     // const contact = await Contact.findByIdAndRemove(contactId);
 
     const { id: userId } = req.user //?
 
     //* =============================console===================================
-    console.log("removeContactById-->req.user:".bgYellow.red); //?
+    console.log("removeTransaction --> req.user:".bgYellow.red); //?
     // console.table(req.user); //?
     // console.table([req.user]);
     console.log(req.user);
 
-    console.log("removeContactById-->userId:".bgYellow.blue, userId); //?
+    console.log("removeTransaction --> userId:".bgYellow.blue, userId); //?
     console.log("");
     //* =======================================================================
 
@@ -28,34 +28,37 @@ const removeContact = async (req, res, next) => {
     //! ==============================================================
 
 
-    const contact = await Contact.findOneAndRemove({ _id: contactId, owner: userId });
+    const transaction = await Transaction.findOneAndRemove({ _id: contactId, owner: userId });
 
 
-    if (!contact) {
+    if (!transaction) {
         //! ===========================console============================
-        console.log("Нет ПОЛЬЗОВАТЕЛЯ с таким ID:".yellow, contactId.red); //!
+        console.log("Нет ТРАНЗАКЦИИ с таким ID:".yellow, contactId.red); //!
         lineBreak();
         console.log("END-->DELETE/:id".red); //!
         //! ==============================================================
-        throw new NotFound(`Contact wiht id:'${contactId}' not found`)
+        throw new NotFound(`Transaction wiht id:'${contactId}' not found`)
     }
 
 
     //! ===========================console============================
-    console.log(`Этот ПОЛЬЗОВАТЕЛЬ с ID: ${contactId} УДАЛЕН:`.bgRed.yellow); //!
-    console.log(contact); //!
+    console.log(`Эта ТРАНЗАКЦИЯ с ID: ${contactId} УДАЛЕНА:`.bgRed.yellow); //!
+    console.log(transaction); //!
     lineBreak();
     console.log("END-->DELETE/:id".red); //!
     lineBreak();
     //! ==============================================================
 
 
-    res.status(200).json({
-        status: "success",
-        code: 204,
-        message: `User wiht id:'${contactId}'was remove:`,
-        data: { contact }
-    });
+    res.status(200).json({ contactId });
+
+    //! OLD
+    // res.status(200).json({
+    //     status: "success",
+    //     code: 204,
+    //     message: `Transaction wiht id:'${contactId}'was remove:`,
+    //     data: { transaction }
+    // });
 };
 
-module.exports = removeContact;
+module.exports = removeTransaction;
