@@ -5,25 +5,54 @@ const { handleSchemaValidationErrors } = require("../helpers");
 
 
 //-----------------------------------------------------------------------------
+const transactionsType = ["income", "expenses"];
+
+const transactionsCategory = [
+    "transport",
+    "products",
+    "health",
+    "alcohol",
+    "entertainment",
+    "housing",
+    "technique",
+    "communal",
+    "sports",
+    "education",
+    "other"
+];
+
+
 const transactionsSchema = Schema({
-    name: {
+    transactionsType: {
         type: String,
-        required: [true, 'Set name for contact'],
+        required: [true, 'Set transactions type'],
+        enum: transactionsType,
     },
-    email: {
+    date: {
         type: String,
-        default: "new@i.ua",
+        required: [true, 'Set transactions date'],
     },
-    phone: {
+    dateFilter: {
         type: String,
+        default: ""
+    },
+    description: {
+        type: String,
+        default: "",
+    },
+    category: {
+        type: String,
+        required: [true, 'Set transactions category'],
+        enum: transactionsCategory,
+    },
+    sum: {
+        type: Number,
+        required: [true, "Set transactions sum"],
     },
     owner: {
         type: Schema.Types.ObjectId,
         ref: 'user',
-    },
-    favorite: {
-        type: Boolean,
-        default: false,
+        required: true,
     },
 }, { versionKey: false, timestamps: true });
 
@@ -33,29 +62,18 @@ transactionsSchema.post("save", handleSchemaValidationErrors)
 
 
 //* ++++++++++++++++++++++ Схемы ВАЛИДАЦИИ Joi +++++++++++++++++++++++++
-const transactionJoiSchemaPut = Joi.object({
-    name: Joi.string()
-        // .alphanum()
-        .min(3)
-        .max(30)
+const transactionJoiSchemaPost = Joi.object({
+    transactionsType: Joi.string()
+        .valid(...transactionsType)
         .required(),
-
-    email: Joi.string()
-        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'ua', 'org',] } })
-        // .required()
-        .optional(),
-
-    phone: Joi.string()
-        // .alphanum()
-        .min(5)
-        .max(14)
+    date: Joi.string()
         .required(),
-
-    owner: Joi.string(),
-    // .required(),
-
-    favorite: Joi.bool()
-        .optional(),
+    category: Joi.string()
+        .required(),
+    sum: Joi.number()
+        .required(),
+    description: Joi.string()
+        .required(),
 });
 
 //--------------------------------------------------------------------
@@ -90,7 +108,7 @@ const Transaction = model("transaction", transactionsSchema); //! DB_HOST
 
 module.exports = {
     Transaction,
-    transactionJoiSchemaPut,
+    transactionJoiSchemaPost,
     transactionJoiSchemaPatch,
 };
 

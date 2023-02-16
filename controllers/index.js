@@ -8,5 +8,5 @@ module.exports = {
     contactsControllers,
     authControllers,
     // usersControllers
-    transactionsControllers
+    transactionsControllers,
 }

@@ -6,11 +6,11 @@ const { validation, controllerWrapper, isValidId, authMiddleware } = require("..
 const { transactionsControllers: ctrl } = require("../../controllers")
 
 const {
-    transactionJoiSchemaPut,
+    transactionJoiSchemaPost,
     transactionJoiSchemaPatch
 } = require("../../models/transactionModel.js");
 
-const validateMiddlewarePut = validation(transactionJoiSchemaPut);
+const validateMiddlewarePost = validation(transactionJoiSchemaPost);
 const validateMiddlewarePatch = validation(transactionJoiSchemaPatch);
 
 
@@ -18,20 +18,8 @@ const validateMiddlewarePatch = validation(transactionJoiSchemaPatch);
 //! 0. Проверка токена
 // router.use(authMiddleware);
 
-//! 1. Получение ТРАНЗАКЦИИ ПОЛЬЗОВАТЕЛЯ 
-// router.get("/", controllerWrapper(ctrl.getAllContacts));
-router.get("/", authMiddleware, controllerWrapper(ctrl.getAllTransactions));
-
-
-
-
-
-
-
-
-
-
-
+//! 1. Получение ВСЕХ ТРАНЗАКЦИЙ ПОЛЬЗОВАТЕЛЯ 
+// router.get("/", authMiddleware, controllerWrapper(ctrl.getAllTransactions));
 
 
 
@@ -40,16 +28,14 @@ router.get("/", authMiddleware, controllerWrapper(ctrl.getAllTransactions));
 // router.get('/:contactId', authMiddleware, isValidId, controllerWrapper(ctrl.getContactById))
 
 
-// //! 3. Создание НОВОГО ПОЛЬЗОВАТЕЛЯ
-// // router.post("/", controllerWrapper(ctrl.addContact));
-// // router.post("/", validateMiddlewarePut, controllerWrapper(ctrl.addContact));
-// router.post("/", authMiddleware, validateMiddlewarePut, controllerWrapper(ctrl.addContact));
+//! 3. Создание НОВОЙ ТРАНЗАКЦИИ Expenses
+router.post("/expenses", authMiddleware, validateMiddlewarePost, controllerWrapper(ctrl.addTransactionExpenses));
 
 
 // //! 4-1. PUT-Обновление ОДНОГО КОНТАКТА по id
 // // router.put('/:contactId', controllerWrapper(ctrl.updatePutContact));
 // // router.put('/:contactId', isValidId, validateMiddlewarePut, controllerWrapper(ctrl.updatePutContact));
-// router.put('/:contactId', authMiddleware, isValidId, validateMiddlewarePut, controllerWrapper(ctrl.updatePutContact));
+// router.put('/:contactId', authMiddleware, isValidId, validateMiddlewarePost, controllerWrapper(ctrl.updatePutContact));
 
 
 
