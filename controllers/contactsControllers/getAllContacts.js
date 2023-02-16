@@ -1,5 +1,3 @@
-//? +++++++++++++++++++  mongoose +++++++++++++++++++
-// const { number } = require("joi");
 const { Contact } = require("../../models");
 const { User } = require("../../models");
 
@@ -16,7 +14,9 @@ const getAllContacts = async (req, res, next) => {
     lineBreak(); // это для ТЕСТА (в коде не нужно)
 
 
-    const { id: userId } = req.user //?
+    const { id: userId } = req.user
+
+
     //* =============================console===================================
     console.log("");
     console.log("getAllContacts --> req.user:".bgYellow.red);
