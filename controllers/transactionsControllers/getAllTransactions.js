@@ -31,7 +31,7 @@ const getAllTransactions = async (req, res) => {
 
     const transactions = await Transaction.find({ owner: userId })
         .sort("sum") //! сортировка по полю "sum"
-        .select({ _id: 0, owner: 0, updatedAt: 0, })   //! не показывать эти поля 
+        .select({ owner: 0, updatedAt: 0, })   //! не показывать эти поля 
 
     //! ===========================console============================
     console.log("START-->GET/All".green); //!
