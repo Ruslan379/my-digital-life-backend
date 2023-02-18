@@ -1,4 +1,5 @@
 const { Transaction } = require("../../models");
+const { User } = require("../../models");
 const { NotFound } = require('http-errors')
 
 const { lineBreak } = require("../../services");
@@ -27,7 +28,10 @@ const removeTransaction = async (req, res, next) => {
     lineBreak();
     //! ==============================================================
 
+    //! Находим Удаляемую ТРАНЗАКЦИЮ по transactionId 
+    // const transactionDel = await Transaction.findOne({ _id: transactionId });
 
+    //! Удаляем ТРАНЗАКЦИЮ
     const transaction = await Transaction.findOneAndRemove({ _id: transactionId, owner: userId });
 
 
@@ -49,6 +53,33 @@ const removeTransaction = async (req, res, next) => {
     lineBreak();
     //! ==============================================================
 
+
+    //! Находим СУММУ  для именения БАЛАНСА
+    const sum = transaction.sum
+    console.log(`СУММА  для именения БАЛАНСА: ${sum} UAN `.bgWhite.red); //!
+    console.log();
+
+    //! Находим значение balance у user
+    const user = await User.findOne({ _id: userId });
+    const { balance } = user
+    console.log(`Старый Баланс пользователя с ID: ${userId} = ${balance} UAN `.bgBlue.red); //!
+    console.log();
+
+    let balanceUpdate = 0
+    //! Проверка на СУММИРОВАТЬ/Expenses или ВЫЧИТАТЬ/Income
+    if (transaction.transactionsType === "expenses") {
+        balanceUpdate = balance + transaction.sum
+    } else {
+        balanceUpdate = balance - transaction.sum
+    }
+
+    //! ЗАПИСЬ нового значения balance в user
+    const userUpdate = await User.findByIdAndUpdate(req.user._id, { balance: Number(balanceUpdate) }, { new: true });
+
+    //! как вариант дублирования user.balance (пока не надо)
+    const { balance: balanceNew } = userUpdate;
+    console.log(`Новый БАЛАНС пользователя с ID: ${userId} = ${balanceNew} UAN `.bgRed.white); //!
+    console.log();
 
     res.status(200).json({ transactionId });
 

@@ -44,14 +44,15 @@ const addTransaction = async (req, res, next) => {
     //! Находим значение balance у user
     const user = await User.findOne({ _id: userId });
     const { balance } = user
-    console.log(`Баланс пользователя с ID: ${userId} = ${balance} UAN `.bgBlue.red); //!
+    console.log(`Старый Баланс пользователя с ID: ${userId} = ${balance} UAN `.bgBlue.red); //!
+    console.log();
 
     let balanceUpdate = 0
     //! Проверка на ВЫЧИТАТЬ/Expenses или СУММИРОВАТЬ/Income
     if (transaction.transactionsType === "expenses") {
         balanceUpdate = balance - transaction.sum
     } else {
-        balanceUpdate = balance - transaction.sum
+        balanceUpdate = balance + transaction.sum
     }
 
 
