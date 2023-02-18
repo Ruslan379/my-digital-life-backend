@@ -1,9 +1,9 @@
 const getAllTransactions = require("./getAllTransactions")
-const addTransactionExpenses = require("./addTransactionExpenses")
+const addTransaction = require("./addTransaction")
 const removeTransaction = require("./removeTransaction")
 
 module.exports = {
     getAllTransactions,
-    addTransactionExpenses,
+    addTransaction,
     removeTransaction,
 }

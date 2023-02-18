@@ -29,7 +29,7 @@ router.get("/", authMiddleware, controllerWrapper(ctrl.getAllTransactions));
 
 
 //! 3. Создание НОВОЙ ТРАНЗАКЦИИ Expenses
-router.post("/expenses", authMiddleware, validateMiddlewarePost, controllerWrapper(ctrl.addTransactionExpenses));
+router.post("/expenses", authMiddleware, validateMiddlewarePost, controllerWrapper(ctrl.addTransaction));
 
 
 // //! 4-1. PUT-Обновление ОДНОГО КОНТАКТА по id
