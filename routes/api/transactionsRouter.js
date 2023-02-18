@@ -51,8 +51,8 @@ router.post("/", authMiddleware, validateMiddlewarePost, controllerWrapper(ctrl.
 
 
 //* 5. Удаление ОДНОЙ ТРАНЗАКЦИИ Expenses или INCOME по id
-// router.delete('/:transactionId', authMiddleware, isValidId, controllerWrapper(ctrl.removeTransaction));
-router.delete('/:transactionId', authMiddleware, controllerWrapper(ctrl.removeTransaction));
+router.delete('/:transactionId', authMiddleware, isValidId, controllerWrapper(ctrl.removeTransaction));
+
 
 
 // //! 6. Удаление ВСЕХ КОНТАКТОВ
