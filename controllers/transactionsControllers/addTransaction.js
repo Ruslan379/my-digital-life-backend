@@ -58,13 +58,14 @@ const addTransaction = async (req, res, next) => {
     //! ЗАПИСЬ нового значения balance в user
     const userUpdate = await User.findByIdAndUpdate(req.user._id, { balance: Number(balanceUpdate) }, { new: true });
 
+    //! как вариант дублирования user.balance (пока не надо)
     const { balance: balanceNew } = userUpdate;
     console.log(`Новый БАЛАНС пользователя с ID: ${userId} = ${balanceNew} UAN `.bgBlue.red); //!
 
 
     res.status(201).json({
         transaction,
-        balanceNew
+        // balanceNew //! как вариант дублирования user.balance (пока не надо)
     });
 };
 

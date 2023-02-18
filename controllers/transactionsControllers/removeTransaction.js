@@ -6,8 +6,8 @@ const { lineBreak } = require("../../services");
 
 //-----------------------------------------------------------------------------
 const removeTransaction = async (req, res, next) => {
-    const { contactId } = req.params;
-    // const contact = await Contact.findByIdAndRemove(contactId);
+    const { transactionId } = req.params;
+    // const contact = await Contact.findByIdAndRemove(transactionId);
 
     const { id: userId } = req.user //?
 
@@ -28,21 +28,21 @@ const removeTransaction = async (req, res, next) => {
     //! ==============================================================
 
 
-    const transaction = await Transaction.findOneAndRemove({ _id: contactId, owner: userId });
+    const transaction = await Transaction.findOneAndRemove({ _id: transactionId, owner: userId });
 
 
     if (!transaction) {
         //! ===========================console============================
-        console.log("Нет ТРАНЗАКЦИИ с таким ID:".yellow, contactId.red); //!
+        console.log("Нет ТРАНЗАКЦИИ с таким ID:".yellow, transactionId.red); //!
         lineBreak();
         console.log("END-->DELETE/:id".red); //!
         //! ==============================================================
-        throw new NotFound(`Transaction wiht id:'${contactId}' not found`)
+        throw new NotFound(`Transaction wiht id:'${transactionId}' not found`)
     }
 
 
     //! ===========================console============================
-    console.log(`Эта ТРАНЗАКЦИЯ с ID: ${contactId} УДАЛЕНА:`.bgRed.yellow); //!
+    console.log(`Эта ТРАНЗАКЦИЯ с ID: ${transactionId} УДАЛЕНА:`.bgRed.yellow); //!
     console.log(transaction); //!
     lineBreak();
     console.log("END-->DELETE/:id".red); //!
@@ -50,13 +50,13 @@ const removeTransaction = async (req, res, next) => {
     //! ==============================================================
 
 
-    res.status(200).json({ contactId });
+    res.status(200).json({ transactionId });
 
     //! OLD
     // res.status(200).json({
     //     status: "success",
     //     code: 204,
-    //     message: `Transaction wiht id:'${contactId}'was remove:`,
+    //     message: `Transaction wiht id:'${transactionId}'was remove:`,
     //     data: { transaction }
     // });
 };

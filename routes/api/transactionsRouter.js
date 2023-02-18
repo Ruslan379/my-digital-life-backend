@@ -18,7 +18,7 @@ const validateMiddlewarePatch = validation(transactionJoiSchemaPatch);
 //! 0. Проверка токена
 // router.use(authMiddleware);
 
-//! 1. Получение ВСЕХ ТРАНЗАКЦИЙ ПОЛЬЗОВАТЕЛЯ 
+//* 1. Получение ВСЕХ ТРАНЗАКЦИЙ ПОЛЬЗОВАТЕЛЯ 
 router.get("/", authMiddleware, controllerWrapper(ctrl.getAllTransactions));
 
 
@@ -28,8 +28,8 @@ router.get("/", authMiddleware, controllerWrapper(ctrl.getAllTransactions));
 // router.get('/:contactId', authMiddleware, isValidId, controllerWrapper(ctrl.getContactById))
 
 
-//! 3. Создание НОВОЙ ТРАНЗАКЦИИ Expenses
-router.post("/expenses", authMiddleware, validateMiddlewarePost, controllerWrapper(ctrl.addTransaction));
+//* 3. Создание НОВОЙ ТРАНЗАКЦИИ Expenses или INCOME
+router.post("/", authMiddleware, validateMiddlewarePost, controllerWrapper(ctrl.addTransaction));
 
 
 // //! 4-1. PUT-Обновление ОДНОГО КОНТАКТА по id
@@ -50,8 +50,9 @@ router.post("/expenses", authMiddleware, validateMiddlewarePost, controllerWrapp
 // router.patch("/:contactId/favorite", authMiddleware, isValidId, validateMiddlewarePatchFavorite, controllerWrapper(ctrl.updatePatchContactFavorite));
 
 
-//! 5. Удаление ОДНОГО КОНТАКТА по id
-router.delete('/:contactId', authMiddleware, isValidId, controllerWrapper(ctrl.removeTransaction));
+//* 5. Удаление ОДНОЙ ТРАНЗАКЦИИ Expenses или INCOME по id
+// router.delete('/:transactionId', authMiddleware, isValidId, controllerWrapper(ctrl.removeTransaction));
+router.delete('/:transactionId', authMiddleware, controllerWrapper(ctrl.removeTransaction));
 
 
 // //! 6. Удаление ВСЕХ КОНТАКТОВ
