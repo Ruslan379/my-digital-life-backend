@@ -28,9 +28,9 @@ const { lineBreak } = require("../../services");
 // const storage = getStorage(app);
 
 //! ++++++++ firebase +++++++++
-const { storage } = require("../../firebase/config.js");
+// const { storage } = require("../../firebase/config.js");
 
-const { ref, uploadBytes, getDownloadURL, getBlob } = require("firebase/storage");
+// const { ref, uploadBytes, getDownloadURL, getBlob } = require("firebase/storage");
 //!firebase +++++++++++++++++++++++++++++++++++++++++++++++
 
 
