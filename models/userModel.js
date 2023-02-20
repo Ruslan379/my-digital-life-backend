@@ -12,8 +12,8 @@ const emailRegexp = /^[\w.]+@[\w]+.[\w]+$/;
 const userSchema = Schema({
     name: {
         type: String,
-        required: [true, 'Name is required'],
-        // unique: true,
+        // required: [true, 'Name is required'],
+        default: "User",
     },
     email: {
         type: String,
@@ -24,10 +24,15 @@ const userSchema = Schema({
         type: String,
         required: [true, 'Password is required'],
     },
-    subscription: {
-        type: String,
-        enum: ["starter", "pro", "business"],
-        default: "starter"
+    //? Для Kapu$ta
+    balance: {
+        type: Number,
+        default: 0,
+    },
+    //? Для Kapu$ta
+    isNotNewUser: {
+        type: Boolean,
+        default: false,
     },
     token: {
         type: String,
@@ -65,10 +70,11 @@ const userSchema = Schema({
         type: String,
         // required: [true, 'Verify token is required'], //? НЕ НАДО для Kapu$ta:
     },
-    //? Для Kapu$ta
-    balance: {
-        type: Number,
-        default: 0,
+    //? НЕ НАДО для Kapu$ta:
+    subscription: {
+        type: String,
+        enum: ["starter", "pro", "business"],
+        default: "starter"
     },
 }, { versionKey: false, timestamps: true });
 
@@ -101,8 +107,8 @@ const subscriptionList = ["starter", "pro", "business"];
 
 const registerJoiSchema = Joi.object({
     name: Joi.string()
-        .min(2)
-        .required(),
+        .min(2),
+    // .required(),
     email: Joi.string()
         .pattern(emailRegexp)
         .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'ua', 'org',] } })

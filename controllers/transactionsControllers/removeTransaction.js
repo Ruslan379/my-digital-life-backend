@@ -81,6 +81,21 @@ const removeTransaction = async (req, res, next) => {
     console.log(`Новый БАЛАНС пользователя с ID: ${userId} = ${balanceNew} UAN `.bgRed.white); //!
     console.log();
 
+    //---------------------------------------------------------------------------
+    //! Находим ДАТУ и вынимаем из нее ДЕНЬ, МЕСЯЦ, ГОД
+    const date = transaction.date
+    console.log("date:".yellow, date); //!
+    console.log();
+
+    const [day, month, year] = date.split("-");
+    console.log("day:".yellow, day); //!
+    console.log("month:".yellow, month); //!
+    console.log("year:".yellow, year); //!
+    console.log();
+    //---------------------------------------------------------------------------
+
+
+
     res.status(200).json({ transactionId });
 
     //! OLD

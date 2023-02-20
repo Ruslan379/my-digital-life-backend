@@ -25,10 +25,10 @@ const getBalance = async (req, res) => {
         throw new Unauthorized("Not authorized");
     };
 
-    //! Получаем поле balance 
-    const { balance } = user;
+    //! Получаем поле balance и isNotNewUser
+    const { balance, isNotNewUser } = user;
 
-    res.status(200).json({ balance })
+    res.status(200).json({ balance, isNotNewUser })
 };
 
 

@@ -79,5 +79,8 @@ router.get("/balance", authMiddleware, controllerWrapper(ctrl.getBalance));
 //! 10. ИЗМЕНИТЬ баланс пользователя
 router.patch("/balance", authMiddleware, controllerWrapper(ctrl.updateBalance));
 
+//! 11. //! ИЗМЕНИТЬ статус  пользователя --> user.isNewUser: false (если balanceNew === 0)
+router.patch("/isnotnewuser", authMiddleware, controllerWrapper(ctrl.changeIsNotNewUser));
+
 // module.exports = { authRouter: router }
 module.exports = router
