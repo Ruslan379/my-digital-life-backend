@@ -8,17 +8,19 @@ const { handleSchemaValidationErrors } = require("../helpers");
 const transactionsType = ["income", "expenses"];
 
 const transactionsCategory = [
-    "transport",
-    "products",
-    "health",
-    "alcohol",
-    "entertainment",
-    "housing",
-    "technique",
-    "communal",
-    "sports",
-    "education",
-    "other"
+    "Transport",
+    "Products",
+    "Health",
+    "Alcohol",
+    "Entertainment",
+    "Housing",
+    "Technique",
+    "Communal, communication",
+    "Sports, hobbies",
+    "Education",
+    "Other",
+    "Salary",
+    "Add.Income"
 ];
 
 
