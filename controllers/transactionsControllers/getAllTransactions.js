@@ -29,9 +29,12 @@ const getAllTransactions = async (req, res) => {
     console.log("");
     //* =======================================================================
 
+    //! Получаем сортированный массив всех транзакций по сумме по убыванию
     const transactions = await Transaction.find({ owner: userId })
-        .sort("sum") //! сортировка по полю "sum"
-        .select({ owner: 0, updatedAt: 0, })   //! не показывать эти поля 
+        // .sort("sum") //! сортировка по полю "sum" по возрастанию
+        .sort({ sum: -1 }) //! сортировка по полю "date" по убыванию
+        // .sort({ date: -1 }) //! сортировка по полю "date" по убыванию
+        .select({ owner: 0, updatedAt: 0, })   //! не показывать эти поля  
 
     //! ===========================console============================
     console.log("START-->GET/All".green); //!
