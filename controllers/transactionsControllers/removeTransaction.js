@@ -82,12 +82,16 @@ const removeTransaction = async (req, res, next) => {
     console.log();
 
     //---------------------------------------------------------------------------
-    //! Находим ДАТУ и вынимаем из нее ДЕНЬ, МЕСЯЦ, ГОД
+    //! Находим ДАТУ и вынимаем из нее ДЕНЬ, МЕСЯЦ, ГОД и ВРЕМЯ
     const date = transaction.date
     console.log("date:".yellow, date); //!
     console.log();
 
-    const [day, month, year] = date.split("-");
+    const [currentDate, currentTime] = date.split(" ");
+    console.log("currentDate:".bgYellow.black, currentDate);
+    console.log("currentTime:".bgYellow.black, currentTime);
+
+    const [day, month, year] = currentDate.split(".");
     console.log("day:".yellow, day); //!
     console.log("month:".yellow, month); //!
     console.log("year:".yellow, year); //!

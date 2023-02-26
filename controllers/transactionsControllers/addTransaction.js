@@ -32,8 +32,8 @@ const addTransaction = async (req, res, next) => {
     //! Получаем сортированный массив всех транзакций по сумме по убыванию
     const transactions = await Transaction.find({ owner: userId })
         // .sort("sum") //! сортировка по полю "sum" по возрастанию
-        .sort({ sum: -1 }) //! сортировка по полю "date" по убыванию
-        // .sort({ date: -1 }) //! сортировка по полю "date" по убыванию
+        // .sort({ sum: -1 }) //! сортировка по полю "date" по убыванию
+        .sort({ date: -1 }) //! сортировка по полю "date" по убыванию
         .select({ owner: 0, updatedAt: 0, })   //! не показывать эти поля 
 
     //! ===========================console============================
@@ -72,7 +72,7 @@ const addTransaction = async (req, res, next) => {
 
     res.status(201).json({
         transaction,
-        transactions, //! Cортированный массив всех транзакций по сумме по убыванию
+        transactions, //! Cортированный массив всех транзакций по date по убыванию
         // balanceNew //! как вариант дублирования user.balance (пока не надо)
     });
 };

@@ -7,7 +7,7 @@ const app = require('./app');
 
 // ----------------------------------------------------------------
 const { DB_HOST, PORT = 3033 } = process.env;
-const currentDate = moment().format("DD-MM-YYYY_hh:mm:ss");
+const currentDate = moment().format("DD-MM-YYYY hh:mm:ss");
 
 
 (async () => {
