@@ -3,11 +3,14 @@ mongoose.set('strictQuery', false); //!!!!!
 const moment = require('moment');
 
 const app = require('./app');
+const x = require('uniqid');
 
 
 // ----------------------------------------------------------------
 const { DB_HOST, PORT = 3033 } = process.env;
-const currentDate = moment().format("DD-MM-YYYY hh:mm:ss");
+// const currentDate = moment().format("DD-MM-YYYY hh:mm:ss");
+// const currentDate = moment().format("x");
+const currentDate = moment().format("YYYYMMDDhhmmss");
 
 
 (async () => {
