@@ -33,7 +33,8 @@ const addTransaction = async (req, res, next) => {
     const transactions = await Transaction.find({ owner: userId })
         // .sort("sum") //! сортировка по полю "sum" по возрастанию
         // .sort({ sum: -1 }) //! сортировка по полю "date" по убыванию
-        .sort({ date: -1 }) //! сортировка по полю "date" по убыванию
+        // .sort({ date: -1 }) //! сортировка по полю "date" по убыванию
+        .sort({ sortDate: -1 }) //! сортировка по полю "date" по убыванию
         .select({ owner: 0, updatedAt: 0, })   //! не показывать эти поля 
 
     //! ===========================console============================

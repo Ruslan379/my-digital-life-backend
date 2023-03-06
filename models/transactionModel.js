@@ -34,9 +34,9 @@ const transactionsSchema = Schema({
         type: String,
         required: [true, 'Set transactions date'],
     },
-    dateFilter: {
-        type: String,
-        default: ""
+    sortDate: {
+        type: Number,
+        default: 0
     },
     description: {
         type: String,
@@ -69,6 +69,8 @@ const transactionJoiSchemaPost = Joi.object({
         .valid(...transactionsType)
         .required(),
     date: Joi.string()
+        .required(),
+    sortDate: Joi.number()
         .required(),
     category: Joi.string()
         .required(),
