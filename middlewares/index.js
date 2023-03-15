@@ -4,6 +4,7 @@ const isValidId = require("./isValidId")
 const authMiddleware = require("./authMiddleware")
 const uploadMiddleware = require("./uploadMiddleware")
 const resizeXandYbyJimpMiddleware = require("./resizeXandYbyJimpMiddleware")
+const passport = require('./googleLogin');
 
 
 module.exports = {
@@ -13,4 +14,5 @@ module.exports = {
     authMiddleware,
     uploadMiddleware,
     resizeXandYbyJimpMiddleware,
+    passport,
 }

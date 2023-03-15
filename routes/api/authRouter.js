@@ -6,7 +6,8 @@ const {
     controllerWrapper,
     authMiddleware,
     uploadMiddleware,
-    resizeXandYbyJimpMiddleware
+    resizeXandYbyJimpMiddleware,
+    passport,
 } = require("../../middlewares");
 
 const { authControllers: ctrl } = require("../../controllers")
@@ -24,6 +25,19 @@ const validateMiddlewareChangeSubscription = validation(changeSubscriptionJoiSch
 const validateMiddlewareVerifyEmail = validation(verifyEmailJoiSchema);
 
 //-----------------------------------------------------------------------------
+//! 0. Google
+router.get(
+    '/google',
+    passport.authenticate('google', { scope: ['email', 'profile'] })
+);
+
+router.get(
+    '/google/callback',
+    passport.authenticate('google', { session: false }),
+    controllerWrapper(ctrl.googleAuth)
+);
+
+
 //! 1. Регистрация
 router.post("/signup", validateMiddlewareRegister, controllerWrapper(ctrl.registrationController))
 

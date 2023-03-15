@@ -9,6 +9,7 @@ const resendVerifyEmail = require("./resendVerifyEmail")
 const getBalance = require("./getBalance")
 const updateBalance = require("./updateBalance")
 const changeIsNotNewUser = require("./changeIsNotNewUser")
+const googleAuth = require('./googleAuth')
 
 
 
@@ -24,4 +25,5 @@ module.exports = {
     getBalance,
     updateBalance,
     changeIsNotNewUser,
+    googleAuth,
 }
